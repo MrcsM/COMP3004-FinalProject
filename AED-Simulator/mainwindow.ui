@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1037</width>
+    <height>920</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(183, 197, 86);</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QFrame" name="frame">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>1041</width>
+      <height>771</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(94, 92, 100);</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QWidget" name="responsiveness" native="true">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>220</y>
+       <width>201</width>
+       <height>141</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(255, 255, 255);</string>
+     </property>
+     <widget class="QWidget" name="responsiveness_indicator" native="true">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>120</y>
+        <width>18</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(119, 118, 123);
+border-style: solid;
+border-width: 5px;
+border-radius: 8px;
+max-width: 8px;
+max-height: 8px;
+min-width: 8px;
+min-height: 8px;</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="call_for_help" native="true">
+     <property name="geometry">
+      <rect>
+       <x>430</x>
+       <y>20</y>
+       <width>201</width>
+       <height>141</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(255, 255, 255);</string>
+     </property>
+     <widget class="QWidget" name="help_indicator" native="true">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>120</y>
+        <width>18</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(119, 118, 123);
+border-style: solid;
+border-width: 5px;
+border-radius: 8px;
+max-width: 8px;
+max-height: 8px;
+min-width: 8px;
+min-height: 8px;</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="attach_defibs" native="true">
+     <property name="geometry">
+      <rect>
+       <x>810</x>
+       <y>290</y>
+       <width>201</width>
+       <height>141</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(255, 255, 255);</string>
+     </property>
+     <widget class="QWidget" name="defibs_indicator" native="true">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>120</y>
+        <width>18</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(119, 118, 123);
+border-style: solid;
+border-width: 5px;
+border-radius: 8px;
+max-width: 8px;
+max-height: 8px;
+min-width: 8px;
+min-height: 8px;</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="analyzing" native="true">
+     <property name="geometry">
+      <rect>
+       <x>670</x>
+       <y>580</y>
+       <width>201</width>
+       <height>141</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(255, 255, 255);</string>
+     </property>
+     <widget class="QWidget" name="analyzing_indicator" native="true">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>10</y>
+        <width>18</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(119, 118, 123);
+border-style: solid;
+border-width: 5px;
+border-radius: 8px;
+max-width: 8px;
+max-height: 8px;
+min-width: 8px;
+min-height: 8px;</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="cpr_img1" native="true">
+     <property name="geometry">
+      <rect>
+       <x>270</x>
+       <y>580</y>
+       <width>201</width>
+       <height>141</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(255, 255, 255);
+</string>
+     </property>
+    </widget>
+    <widget class="QWidget" name="shock" native="true">
+     <property name="geometry">
+      <rect>
+       <x>440</x>
+       <y>370</y>
+       <width>180</width>
+       <height>180</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(119, 118, 123);
+border-style: solid;
+border-width: 50px;
+border-radius: 80px;
+max-width: 80px;
+max-height: 80px;
+min-width: 80px;
+min-height: 80px;
+</string>
+     </property>
+     <widget class="QWidget" name="shock_indicator" native="true">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>80</y>
+        <width>18</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(192, 191, 188);
+border-style: solid;
+border-width: 5px;
+border-radius: 8px;
+max-width: 8px;
+max-height: 8px;
+min-width: 8px;
+min-height: 8px;</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="display" native="true">
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>200</y>
+       <width>431</width>
+       <height>141</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(119, 118, 123);</string>
+     </property>
+    </widget>
+    <widget class="QWidget" name="connectors" native="true">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>330</y>
+       <width>51</width>
+       <height>331</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(119, 118, 123);</string>
+     </property>
+    </widget>
+    <widget class="QWidget" name="cpr_img_2" native="true">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>470</y>
+       <width>211</width>
+       <height>151</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(255, 255, 255);
+</string>
+     </property>
+     <widget class="QWidget" name="cpr" native="true">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>110</y>
+        <width>51</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <widget class="QWidget" name="cpr_indicator" native="true">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>10</y>
+         <width>18</width>
+         <height>18</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(119, 118, 123);
+border-style: solid;
+border-width: 5px;
+border-radius: 8px;
+max-width: 8px;
+max-height: 8px;
+min-width: 8px;
+min-height: 8px;</string>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QPushButton" name="power_button">
+    <property name="geometry">
+     <rect>
+      <x>870</x>
+      <y>810</y>
+      <width>122</width>
+      <height>72</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(119, 118, 123);
+border-style: solid;
+border-width: 1px;
+border-radius: 30px;
+max-width: 120px;
+max-height: 70px;
+min-width: 120px;
+min-height: 70px;
+</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QWidget" name="status_indicator" native="true">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>810</y>
+      <width>120</width>
+      <height>80</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(119, 118, 123);</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
