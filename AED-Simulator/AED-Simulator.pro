@@ -10,10 +10,16 @@ CONFIG += c++11
 
 SOURCES += \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    prompt.cpp \
+    timer.cpp \
+    victim.cpp
 
 HEADERS += \
-    mainwindow.h
+    mainwindow.h \
+    prompt.h \
+    timer.h \
+    victim.h
 
 FORMS += \
     mainwindow.ui
@@ -22,3 +28,11 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+DISTFILES += \
+    images/check.png \
+    images/x.png
+
+RESOURCES += \
+    resources.qrc \
+    resources.qrc

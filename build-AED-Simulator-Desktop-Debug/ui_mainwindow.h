@@ -12,6 +12,7 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QFrame>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
@@ -36,12 +37,21 @@ public:
     QWidget *shock;
     QWidget *shock_indicator;
     QWidget *display;
+    QLabel *shock_count;
+    QLabel *elapsed_time;
+    QLabel *visual_prompt;
     QWidget *connectors;
     QWidget *cpr_img_2;
     QWidget *cpr;
     QWidget *cpr_indicator;
     QPushButton *power_button;
     QWidget *status_indicator;
+    QLabel *disabled_pass;
+    QLabel *pass_label;
+    QLabel *disabled_failed;
+    QLabel *failed_label;
+    QLabel *on_label;
+    QLabel *off_label;
     QStatusBar *statusbar;
 
     void setupUi(QMainWindow *MainWindow)
@@ -148,8 +158,23 @@ public:
 "min-height: 8px;"));
         display = new QWidget(frame);
         display->setObjectName(QString::fromUtf8("display"));
-        display->setGeometry(QRect(320, 200, 431, 141));
-        display->setStyleSheet(QString::fromUtf8("background-color: rgb(119, 118, 123);"));
+        display->setGeometry(QRect(320, 200, 431, 171));
+        display->setStyleSheet(QString::fromUtf8("background-color: rgb(164, 157, 157);"));
+        shock_count = new QLabel(display);
+        shock_count->setObjectName(QString::fromUtf8("shock_count"));
+        shock_count->setGeometry(QRect(0, 0, 121, 16));
+        shock_count->setStyleSheet(QString::fromUtf8("font: 10pt \"Source Code Pro\";"));
+        elapsed_time = new QLabel(display);
+        elapsed_time->setObjectName(QString::fromUtf8("elapsed_time"));
+        elapsed_time->setGeometry(QRect(230, 0, 201, 20));
+        elapsed_time->setStyleSheet(QString::fromUtf8("font: 10pt \"Source Code Pro\";"));
+        elapsed_time->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+        visual_prompt = new QLabel(display);
+        visual_prompt->setObjectName(QString::fromUtf8("visual_prompt"));
+        visual_prompt->setGeometry(QRect(0, 130, 431, 41));
+        visual_prompt->setStyleSheet(QString::fromUtf8("font: 10pt \"Source Code Pro\";"));
+        visual_prompt->setAlignment(Qt::AlignCenter);
+        visual_prompt->setWordWrap(true);
         connectors = new QWidget(frame);
         connectors->setObjectName(QString::fromUtf8("connectors"));
         connectors->setGeometry(QRect(10, 330, 51, 331));
@@ -187,9 +212,53 @@ public:
 ""));
         status_indicator = new QWidget(centralwidget);
         status_indicator->setObjectName(QString::fromUtf8("status_indicator"));
-        status_indicator->setGeometry(QRect(30, 810, 120, 80));
+        status_indicator->setGeometry(QRect(30, 810, 131, 80));
         status_indicator->setStyleSheet(QString::fromUtf8("background-color: rgb(119, 118, 123);"));
+        disabled_pass = new QLabel(status_indicator);
+        disabled_pass->setObjectName(QString::fromUtf8("disabled_pass"));
+        disabled_pass->setGeometry(QRect(0, 0, 62, 81));
+        disabled_pass->setPixmap(QPixmap(QString::fromUtf8(":/images/images/grayed_out_check.png")));
+        disabled_pass->setScaledContents(true);
+        pass_label = new QLabel(status_indicator);
+        pass_label->setObjectName(QString::fromUtf8("pass_label"));
+        pass_label->setEnabled(true);
+        pass_label->setGeometry(QRect(0, 0, 62, 81));
+        pass_label->setPixmap(QPixmap(QString::fromUtf8(":/images/images/check.png")));
+        pass_label->setScaledContents(true);
+        disabled_failed = new QLabel(status_indicator);
+        disabled_failed->setObjectName(QString::fromUtf8("disabled_failed"));
+        disabled_failed->setGeometry(QRect(70, 0, 61, 81));
+        disabled_failed->setPixmap(QPixmap(QString::fromUtf8(":/images/images/grayed_out_x.png")));
+        disabled_failed->setScaledContents(true);
+        failed_label = new QLabel(status_indicator);
+        failed_label->setObjectName(QString::fromUtf8("failed_label"));
+        failed_label->setEnabled(true);
+        failed_label->setGeometry(QRect(70, 0, 61, 81));
+        failed_label->setPixmap(QPixmap(QString::fromUtf8(":/images/images/x.png")));
+        failed_label->setScaledContents(true);
+        on_label = new QLabel(centralwidget);
+        on_label->setObjectName(QString::fromUtf8("on_label"));
+        on_label->setEnabled(false);
+        on_label->setGeometry(QRect(900, 830, 62, 17));
+        on_label->setContextMenuPolicy(Qt::NoContextMenu);
+        on_label->setStyleSheet(QString::fromUtf8("background-color: rgb(119, 118, 123);\n"
+"font: 75 15pt \"DejaVu Sans\";\n"
+"color: rgb(164, 157, 157);"));
+        on_label->setAlignment(Qt::AlignCenter);
+        off_label = new QLabel(centralwidget);
+        off_label->setObjectName(QString::fromUtf8("off_label"));
+        off_label->setEnabled(false);
+        off_label->setGeometry(QRect(900, 850, 62, 17));
+        off_label->setStyleSheet(QString::fromUtf8("background-color: rgb(119, 118, 123);\n"
+"font: 75 15pt \"DejaVu Sans\";\n"
+"color: rgb(164, 157, 157);"));
+        off_label->setAlignment(Qt::AlignCenter);
         MainWindow->setCentralWidget(centralwidget);
+        frame->raise();
+        power_button->raise();
+        status_indicator->raise();
+        off_label->raise();
+        on_label->raise();
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
         MainWindow->setStatusBar(statusbar);
@@ -202,7 +271,16 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
+        shock_count->setText(QString());
+        elapsed_time->setText(QString());
+        visual_prompt->setText(QString());
         power_button->setText(QString());
+        disabled_pass->setText(QString());
+        pass_label->setText(QString());
+        disabled_failed->setText(QString());
+        failed_label->setText(QString());
+        on_label->setText(QCoreApplication::translate("MainWindow", "ON", nullptr));
+        off_label->setText(QCoreApplication::translate("MainWindow", "OFF", nullptr));
     } // retranslateUi
 
 };
