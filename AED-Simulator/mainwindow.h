@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "timer.h"
+#include "victim.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -17,5 +19,8 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    Timer *t;
+    Victim *v;
+
 };
 #endif // MAINWINDOW_H
