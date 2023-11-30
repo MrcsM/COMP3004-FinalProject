@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>images/check.png</file>
+        <file>images/grayed_out_check.png</file>
+        <file>images/grayed_out_x.png</file>
+        <file>images/x.png</file>
+    </qresource>
+</RCC>

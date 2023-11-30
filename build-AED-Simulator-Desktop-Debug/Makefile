@@ -53,11 +53,23 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = ../AED-Simulator/main.cpp \
-		../AED-Simulator/mainwindow.cpp moc_mainwindow.cpp
+		../AED-Simulator/mainwindow.cpp \
+		../AED-Simulator/prompt.cpp \
+		../AED-Simulator/timer.cpp \
+		../AED-Simulator/victim.cpp qrc_resources.cpp \
+		moc_mainwindow.cpp \
+		moc_timer.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
-		moc_mainwindow.o
-DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
+		prompt.o \
+		timer.o \
+		victim.o \
+		qrc_resources.o \
+		moc_mainwindow.o \
+		moc_timer.o
+DIST          = ../AED-Simulator/images/check.png \
+		../AED-Simulator/images/x.png \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/linux.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/sanitize.conf \
@@ -114,6 +126,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_config.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_post.prf \
+		../AED-Simulator/.qmake.stash \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/toolchain.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf \
@@ -134,8 +147,14 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exceptions.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
-		../AED-Simulator/AED-Simulator.pro ../AED-Simulator/mainwindow.h ../AED-Simulator/main.cpp \
-		../AED-Simulator/mainwindow.cpp
+		../AED-Simulator/AED-Simulator.pro ../AED-Simulator/mainwindow.h \
+		../AED-Simulator/prompt.h \
+		../AED-Simulator/timer.h \
+		../AED-Simulator/victim.h ../AED-Simulator/main.cpp \
+		../AED-Simulator/mainwindow.cpp \
+		../AED-Simulator/prompt.cpp \
+		../AED-Simulator/timer.cpp \
+		../AED-Simulator/victim.cpp
 QMAKE_TARGET  = AED-Simulator
 DESTDIR       = 
 TARGET        = AED-Simulator
@@ -204,6 +223,7 @@ Makefile: ../AED-Simulator/AED-Simulator.pro /usr/lib/x86_64-linux-gnu/qt5/mkspe
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_config.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/toolchain.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf \
@@ -224,7 +244,8 @@ Makefile: ../AED-Simulator/AED-Simulator.pro /usr/lib/x86_64-linux-gnu/qt5/mkspe
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exceptions.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
-		../AED-Simulator/AED-Simulator.pro
+		../AED-Simulator/AED-Simulator.pro \
+		../AED-Simulator/resources.qrc
 	$(QMAKE) -o Makefile ../AED-Simulator/AED-Simulator.pro -spec linux-g++ CONFIG+=debug CONFIG+=qml_debug
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf:
@@ -283,6 +304,7 @@ Makefile: ../AED-Simulator/AED-Simulator.pro /usr/lib/x86_64-linux-gnu/qt5/mkspe
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_config.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/toolchain.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf:
@@ -304,6 +326,7 @@ Makefile: ../AED-Simulator/AED-Simulator.pro /usr/lib/x86_64-linux-gnu/qt5/mkspe
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf:
 ../AED-Simulator/AED-Simulator.pro:
+../AED-Simulator/resources.qrc:
 qmake: FORCE
 	@$(QMAKE) -o Makefile ../AED-Simulator/AED-Simulator.pro -spec linux-g++ CONFIG+=debug CONFIG+=qml_debug
 
@@ -318,9 +341,10 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
+	$(COPY_FILE) --parents ../AED-Simulator/resources.qrc ../AED-Simulator/resources.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../AED-Simulator/mainwindow.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../AED-Simulator/main.cpp ../AED-Simulator/mainwindow.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../AED-Simulator/mainwindow.h ../AED-Simulator/prompt.h ../AED-Simulator/timer.h ../AED-Simulator/victim.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../AED-Simulator/main.cpp ../AED-Simulator/mainwindow.cpp ../AED-Simulator/prompt.cpp ../AED-Simulator/timer.cpp ../AED-Simulator/victim.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../AED-Simulator/mainwindow.ui $(DISTDIR)/
 
 
@@ -345,21 +369,46 @@ check: first
 
 benchmark: first
 
-compiler_rcc_make_all:
+compiler_rcc_make_all: qrc_resources.cpp qrc_resources.cpp
 compiler_rcc_clean:
+	-$(DEL_FILE) qrc_resources.cpp qrc_resources.cpp
+qrc_resources.cpp: ../AED-Simulator/resources.qrc \
+		/usr/lib/qt5/bin/rcc \
+		../AED-Simulator/images/grayed_out_check.png \
+		../AED-Simulator/images/x.png \
+		../AED-Simulator/images/check.png \
+		../AED-Simulator/images/grayed_out_x.png
+	/usr/lib/qt5/bin/rcc -name resources ../AED-Simulator/resources.qrc -o qrc_resources.cpp
+
+qrc_resources.cpp: ../AED-Simulator/resources.qrc \
+		/usr/lib/qt5/bin/rcc \
+		../AED-Simulator/images/grayed_out_check.png \
+		../AED-Simulator/images/x.png \
+		../AED-Simulator/images/check.png \
+		../AED-Simulator/images/grayed_out_x.png
+	/usr/lib/qt5/bin/rcc -name resources ../AED-Simulator/resources.qrc -o qrc_resources.cpp
+
 compiler_moc_predefs_make_all: moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) moc_predefs.h
 moc_predefs.h: /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -std=gnu++11 -Wall -Wextra -dM -E -o moc_predefs.h /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_mainwindow.cpp
+compiler_moc_header_make_all: moc_mainwindow.cpp moc_timer.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp
+	-$(DEL_FILE) moc_mainwindow.cpp moc_timer.cpp
 moc_mainwindow.cpp: ../AED-Simulator/mainwindow.h \
+		../AED-Simulator/timer.h \
+		../AED-Simulator/victim.h \
+		../AED-Simulator/prompt.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
 	/usr/lib/qt5/bin/moc $(DEFINES) --include /media/sf_3004/COMP3004-FinalProject/build-AED-Simulator-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/media/sf_3004/COMP3004-FinalProject/AED-Simulator -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../AED-Simulator/mainwindow.h -o moc_mainwindow.cpp
+
+moc_timer.cpp: ../AED-Simulator/timer.h \
+		moc_predefs.h \
+		/usr/lib/qt5/bin/moc
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /media/sf_3004/COMP3004-FinalProject/build-AED-Simulator-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/media/sf_3004/COMP3004-FinalProject/AED-Simulator -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../AED-Simulator/timer.h -o moc_timer.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -378,19 +427,40 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
+compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
 
 ####### Compile
 
-main.o: ../AED-Simulator/main.cpp ../AED-Simulator/mainwindow.h
+main.o: ../AED-Simulator/main.cpp ../AED-Simulator/mainwindow.h \
+		../AED-Simulator/timer.h \
+		../AED-Simulator/victim.h \
+		../AED-Simulator/prompt.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../AED-Simulator/main.cpp
 
 mainwindow.o: ../AED-Simulator/mainwindow.cpp ../AED-Simulator/mainwindow.h \
+		../AED-Simulator/timer.h \
+		../AED-Simulator/victim.h \
+		../AED-Simulator/prompt.h \
 		ui_mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../AED-Simulator/mainwindow.cpp
 
+prompt.o: ../AED-Simulator/prompt.cpp ../AED-Simulator/prompt.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o prompt.o ../AED-Simulator/prompt.cpp
+
+timer.o: ../AED-Simulator/timer.cpp ../AED-Simulator/timer.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o timer.o ../AED-Simulator/timer.cpp
+
+victim.o: ../AED-Simulator/victim.cpp ../AED-Simulator/victim.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o victim.o ../AED-Simulator/victim.cpp
+
+qrc_resources.o: qrc_resources.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_resources.o qrc_resources.cpp
+
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
+
+moc_timer.o: moc_timer.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_timer.o moc_timer.cpp
 
 ####### Install
 

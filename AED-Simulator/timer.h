@@ -27,6 +27,10 @@ class Timer : public QObject
         void setPoweredOffToTrue();
         void setPoweredOffToFalse();
 
+        int getElapsedTime() {
+            return elapsedCount;
+        }
+
     private slots:
         void ElapsedTimer_TimeOut_Event_Slot();
         void CompressionTimer_TimeOut_Event_Slot();
