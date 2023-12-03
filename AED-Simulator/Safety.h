@@ -2,7 +2,7 @@
 #define SAFETY_H
 
 
-class Safety: public Victim{
+class Safety: public victim{
     public:
         bool runSelfTest();
         bool isCableattached();
