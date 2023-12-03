@@ -11,6 +11,7 @@ CONFIG += c++11
 SOURCES += \
     Safety.cpp \
     Simulations.cpp \
+    aed.cpp \
     main.cpp \
     mainwindow.cpp \
     operations.cpp \
@@ -21,6 +22,7 @@ SOURCES += \
 HEADERS += \
     Safety.h \
     Simulations.h \
+    aed.h \
     mainwindow.h \
     operations.h \
     prompt.h \
