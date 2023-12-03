@@ -1,8 +1,9 @@
 #ifndef SAFETY_H
 #define SAFETY_H
 
+#include "victim.h"
 
-class Safety: public victim{
+class Safety: public Victim {
     public:
         bool runSelfTest();
         bool isCableattached();

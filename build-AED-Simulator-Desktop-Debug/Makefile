@@ -52,15 +52,21 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../AED-Simulator/main.cpp \
+SOURCES       = ../AED-Simulator/Safety.cpp \
+		../AED-Simulator/Simulations.cpp \
+		../AED-Simulator/main.cpp \
 		../AED-Simulator/mainwindow.cpp \
+		../AED-Simulator/operations.cpp \
 		../AED-Simulator/prompt.cpp \
 		../AED-Simulator/timer.cpp \
 		../AED-Simulator/victim.cpp qrc_resources.cpp \
 		moc_mainwindow.cpp \
 		moc_timer.cpp
-OBJECTS       = main.o \
+OBJECTS       = Safety.o \
+		Simulations.o \
+		main.o \
 		mainwindow.o \
+		operations.o \
 		prompt.o \
 		timer.o \
 		victim.o \
@@ -147,11 +153,17 @@ DIST          = ../AED-Simulator/images/check.png \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exceptions.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
-		../AED-Simulator/AED-Simulator.pro ../AED-Simulator/mainwindow.h \
+		../AED-Simulator/AED-Simulator.pro ../AED-Simulator/Safety.h \
+		../AED-Simulator/Simulations.h \
+		../AED-Simulator/mainwindow.h \
+		../AED-Simulator/operations.h \
 		../AED-Simulator/prompt.h \
 		../AED-Simulator/timer.h \
-		../AED-Simulator/victim.h ../AED-Simulator/main.cpp \
+		../AED-Simulator/victim.h ../AED-Simulator/Safety.cpp \
+		../AED-Simulator/Simulations.cpp \
+		../AED-Simulator/main.cpp \
 		../AED-Simulator/mainwindow.cpp \
+		../AED-Simulator/operations.cpp \
 		../AED-Simulator/prompt.cpp \
 		../AED-Simulator/timer.cpp \
 		../AED-Simulator/victim.cpp
@@ -343,8 +355,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../AED-Simulator/resources.qrc ../AED-Simulator/resources.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../AED-Simulator/mainwindow.h ../AED-Simulator/prompt.h ../AED-Simulator/timer.h ../AED-Simulator/victim.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../AED-Simulator/main.cpp ../AED-Simulator/mainwindow.cpp ../AED-Simulator/prompt.cpp ../AED-Simulator/timer.cpp ../AED-Simulator/victim.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../AED-Simulator/Safety.h ../AED-Simulator/Simulations.h ../AED-Simulator/mainwindow.h ../AED-Simulator/operations.h ../AED-Simulator/prompt.h ../AED-Simulator/timer.h ../AED-Simulator/victim.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../AED-Simulator/Safety.cpp ../AED-Simulator/Simulations.cpp ../AED-Simulator/main.cpp ../AED-Simulator/mainwindow.cpp ../AED-Simulator/operations.cpp ../AED-Simulator/prompt.cpp ../AED-Simulator/timer.cpp ../AED-Simulator/victim.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../AED-Simulator/mainwindow.ui $(DISTDIR)/
 
 
@@ -431,6 +443,12 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 
 ####### Compile
 
+Safety.o: ../AED-Simulator/Safety.cpp ../AED-Simulator/Safety.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Safety.o ../AED-Simulator/Safety.cpp
+
+Simulations.o: ../AED-Simulator/Simulations.cpp ../AED-Simulator/Simulations.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Simulations.o ../AED-Simulator/Simulations.cpp
+
 main.o: ../AED-Simulator/main.cpp ../AED-Simulator/mainwindow.h \
 		../AED-Simulator/timer.h \
 		../AED-Simulator/victim.h \
@@ -443,6 +461,9 @@ mainwindow.o: ../AED-Simulator/mainwindow.cpp ../AED-Simulator/mainwindow.h \
 		../AED-Simulator/prompt.h \
 		ui_mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../AED-Simulator/mainwindow.cpp
+
+operations.o: ../AED-Simulator/operations.cpp ../AED-Simulator/operations.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o operations.o ../AED-Simulator/operations.cpp
 
 prompt.o: ../AED-Simulator/prompt.cpp ../AED-Simulator/prompt.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o prompt.o ../AED-Simulator/prompt.cpp
