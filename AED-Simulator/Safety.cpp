@@ -15,6 +15,7 @@ bool Safety::getFailed(){
 bool Safety::runSelfTest(){
 
 }
+
 bool Safety::isCableattached(){
     return cableAttached;
 }

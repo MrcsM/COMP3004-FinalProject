@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QPixmap>
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -17,12 +18,20 @@ MainWindow::MainWindow(QWidget *parent)
     currentPrompt = Voice(OFF);
     powerState = false;
 
+    depthValue = 0;
+
     p = new Prompt();
     t = new Timer();
     //v = new Victim();
     //v->randomizeVictim();
     //t->startCPRTimer(1000);
     //v->printVictim();
+
+    ui->rhythmcomboBox->addItem("Normal");
+    ui->rhythmcomboBox->addItem("Vfib");
+    ui->rhythmcomboBox->addItem("Vtach");
+    ui->rhythmcomboBox->addItem("Unknown");
+    ui->rhythmcomboBox->addItem("Random");
 
     connect(ui->power_button, SIGNAL(pressed()), this, SLOT (powerButton()));
 }
@@ -180,3 +189,79 @@ void MainWindow::powerButton() {
         t->stopElapsedTimer();
     }
 }
+
+void MainWindow::changeRhythm(int rhythm) {
+
+   QPixmap normal("me/student/COMP3004-FinalProject-main/AED-Simulator/images/normal.png");
+   QPixmap vfib("me/student/COMP3004-FinalProject-main/AED-Simulator/images/vfib.jpeg");
+   QPixmap vtach("me/student/COMP3004-FinalProject-main/AED-Simulator/images/vtach.jpeg");
+   QPixmap afib("me/student/COMP3004-FinalProject-main/AED-Simulator/images/afib.jpeg");
+   int width = ui->rhythmImage->width();
+   int height = ui->rhythmImage->height();
+
+   if (rhythm == 1) {
+
+       ui->rhythmImage->setPixmap(normal.scaled(width,height,Qt::KeepAspectRatio));
+
+   } else if (rhythm == 2) {
+
+       ui->rhythmImage->setPixmap(vfib.scaled(width,height,Qt::KeepAspectRatio));
+
+   } else if (rhythm == 3) {
+
+       ui->rhythmImage->setPixmap(vtach.scaled(width,height,Qt::KeepAspectRatio));
+
+   } else if (rhythm == 4) {
+
+       ui->rhythmImage->setPixmap(afib.scaled(width,height,Qt::KeepAspectRatio));
+
+   }
+
+}
+
+int MainWindow::getComboBoxSelection() {
+
+    QString tempSelected = ui->rhythmcomboBox->currentText();
+
+    if (tempSelected == "Normal") {
+
+        return 1;
+
+    } else if (tempSelected == "Vfib") {
+
+        return 2;
+
+    } else if (tempSelected == "Vtach") {
+
+        return 3;
+
+    } else if (tempSelected == "Unknown") {
+
+        return 4;
+
+    } else if (tempSelected == "Random") {
+
+        return 5;
+
+    } else {
+
+        return 5;
+
+    }
+
+}
+
+
+float MainWindow::on_depthBox_textChanged(const QString &arg1)
+{
+
+    depthValue = arg1.toFloat();
+
+}
+
+float MainWindow::getDepth() {
+
+    return depthValue;
+
+}
+

@@ -4,5 +4,9 @@
         <file>images/grayed_out_check.png</file>
         <file>images/grayed_out_x.png</file>
         <file>images/x.png</file>
+        <file>images/normal.png</file>
+        <file>images/vfib.jpeg</file>
+        <file>images/vtach.jpeg</file>
+        <file>images/afib.jpeg</file>
     </qresource>
 </RCC>

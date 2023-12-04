@@ -291,6 +291,19 @@ min-height: 8px;</string>
        <bool>true</bool>
       </property>
      </widget>
+     <widget class="QLabel" name="rhythmImage">
+      <property name="geometry">
+       <rect>
+        <x>1</x>
+        <y>26</y>
+        <width>381</width>
+        <height>101</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="connectors" native="true">
      <property name="geometry">
@@ -520,11 +533,57 @@ color: rgb(164, 157, 157);</string>
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
+   <widget class="QWidget" name="formLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>170</x>
+      <y>810</y>
+      <width>241</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <layout class="QFormLayout" name="formLayoutRhythm">
+     <item row="0" column="0">
+      <widget class="QLabel" name="comboLabel">
+       <property name="text">
+        <string>Select Rhythm: </string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QComboBox" name="rhythmcomboBox"/>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="formLayoutWidget_2">
+    <property name="geometry">
+     <rect>
+      <x>170</x>
+      <y>860</y>
+      <width>241</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <layout class="QFormLayout" name="formLayout">
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="depthBox"/>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="depthLabel">
+       <property name="text">
+        <string>Depth: </string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
    <zorder>frame</zorder>
    <zorder>power_button</zorder>
    <zorder>status_indicator</zorder>
    <zorder>off_label</zorder>
    <zorder>on_label</zorder>
+   <zorder>formLayoutWidget</zorder>
+   <zorder>formLayoutWidget_2</zorder>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>

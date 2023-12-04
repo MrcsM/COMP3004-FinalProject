@@ -25,6 +25,9 @@ public slots:
     void statusIndicator();
     void lcdDisplay();
     void heartButtonLight(bool);
+    void changeRhythm(int rhythm);
+    int getComboBoxSelection();
+    float getDepth();
 
 private:
     Ui::MainWindow *ui;
@@ -35,6 +38,8 @@ private:
 
     Voice currentPrompt;
     bool powerState;
+
+    float depthValue;
 
 private slots:
     void powerButton();
@@ -63,5 +68,6 @@ private slots:
         return format;
     }
 
+    float on_depthBox_textChanged(const QString &arg1);
 };
 #endif // MAINWINDOW_H
