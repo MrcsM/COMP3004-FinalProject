@@ -88,6 +88,9 @@ QString Prompt::playVoicePrompt(Voice v) {
     case COMMUNICATIONS:
         return "IrDA Communications has been established.";
         break;
+    case AMBULANCE_ARRIVES:
+        return "Ambulance has arrived. Leave job to paramedics.";
+        break;
     case OFF:
         return "";
         break;

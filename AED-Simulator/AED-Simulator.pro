@@ -38,7 +38,13 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
+    images/afib.jpeg \
     images/check.png \
+    images/grayed_out_check.png \
+    images/grayed_out_x.png \
+    images/normal.png \
+    images/vfib.jpeg \
+    images/vtach.jpeg \
     images/x.png
 
 RESOURCES += \

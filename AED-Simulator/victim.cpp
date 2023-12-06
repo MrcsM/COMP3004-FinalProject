@@ -15,7 +15,7 @@ void Victim::setWeight(int w)
     weight = w;
 }
 
-void Victim::setAge(int a)
+void Victim::setAge(char a)
 {
     age = a;
 }
@@ -30,9 +30,9 @@ int Victim::getWeight()
     return weight;
 }
 
-int Victim::getAge()
+char Victim::getAge()
 {
-    return weight;
+    return age;
 }
 
 char Victim::getSex()
@@ -45,9 +45,15 @@ void Victim::randomizeVictim()
     srand(time(NULL));
 
     weight = rand() % MAXWEIGHT + 1;
-    age = rand() % MAXAGE;
-    int sexSelectorTemp = rand() % 3 + 1;
 
+    int ageSelectorTemp = rand() % 2 + 1;
+    if (ageSelectorTemp == 0) {
+        age = 'A';
+    } else if (ageSelectorTemp == 1) {
+        age = 'C';
+    }
+
+    int sexSelectorTemp = rand() % 3 + 1;
     if (sexSelectorTemp == MALECHOSEN) {
         sex = 'M';
     } else if (sexSelectorTemp == FEMALECHOSEN) {

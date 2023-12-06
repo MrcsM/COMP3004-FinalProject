@@ -1,9 +1,18 @@
 #ifndef SIMULATIONS_H
 #define SIMULATIONS_H
 
-class Simulations{
+class Simulations {
     public:
-        int pickTest(int testNum);
+
+        Simulations();
+        ~Simulations();
+        void pickTest(int);
+        int getSimulation();
+
+    private:
+        int simulationChoice;
+
+        int randomizeChoice();
 
 };
 
