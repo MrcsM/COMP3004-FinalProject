@@ -1,27 +1,21 @@
 #include "Simulations.h"
 #include <random>
 
-Simulations::Simulations() :ui() {
-
+Simulations::Simulations() {
     simulationChoice = 5;
-
 }
 
 Simulations::~Simulations() {
 
 }
 
-int Simulations::pickTest(){
+void Simulations::pickTest(int uiComboBoxSelection){
 
-    simulationChoice = ui->getComboBoxSelection();
+    simulationChoice = uiComboBoxSelection;
 
     if (simulationChoice == 5) {
-
         simulationChoice = randomizeChoice();
     }
-
-
-    return simulationChoice;
 }
 
 int Simulations::randomizeChoice() {

@@ -18,16 +18,16 @@ class Victim : public QObject
 public:
     Victim();
     void setWeight(int);
-    void setAge(int);
+    void setAge(char);
     void setSex(char);
     int getWeight();
-    int getAge();
+    char getAge();
     char getSex();
     void randomizeVictim();
     void printVictim();
 private:
     int weight;
-    int age;
+    char age;
     char sex;
 };
 

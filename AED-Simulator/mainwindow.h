@@ -3,9 +3,12 @@
 
 #include <QMainWindow>
 #include <QElapsedTimer>
+#include "QDebug"
 #include "timer.h"
 #include "victim.h"
 #include "prompt.h"
+#include "operations.h"
+#include "Simulations.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -27,7 +30,8 @@ public slots:
     void heartButtonLight(bool);
     void changeRhythm(int rhythm);
     int getComboBoxSelection();
-    float getDepth();
+    void makeVictim();
+    void on_power_button_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -35,16 +39,17 @@ private:
     Victim *v;
     int curr;
     Prompt *p;
+    Simulations *sim;
+    Operations *op;
+
+    QTimer *mainTimer;
+    int mainCount;
 
     Voice currentPrompt;
     bool powerState;
-
-    float depthValue;
+    bool depthCheck;
 
 private slots:
-    void powerButton();
-
-    void cycle();
 
     QString formatSeconds(int seconds) {
         int hours = seconds / 3600;
@@ -67,7 +72,6 @@ private slots:
 
         return format;
     }
-
-    float on_depthBox_textChanged(const QString &arg1);
+    void MainTimer_TimeOut_Event_Slot();
 };
 #endif // MAINWINDOW_H

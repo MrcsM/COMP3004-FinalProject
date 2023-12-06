@@ -1,19 +1,15 @@
 #ifndef SIMULATIONS_H
 #define SIMULATIONS_H
 
-#include "mainwindow.h"
-
-class Simulations{
+class Simulations {
     public:
 
         Simulations();
         ~Simulations();
-        int pickTest();
+        void pickTest(int);
         int getSimulation();
 
     private:
-
-        MainWindow *ui;
         int simulationChoice;
 
         int randomizeChoice();

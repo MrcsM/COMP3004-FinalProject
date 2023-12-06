@@ -1,7 +1,7 @@
 #include "operations.h"
 #include  <random>
 
-Operations::Operations() :sim(), ui(), t(), p() {
+Operations::Operations() {
 
     depthCheckValue  = 0;
     simChosen = 0;
@@ -15,75 +15,54 @@ Operations::~Operations() {
 
 }
 
-bool Operations::depthCheck(){
+bool Operations::depthCheck(float uiDepth){
 
-    depthCheckValue = ui->getDepth();
+    depthCheckValue = uiDepth;
 
-    if(1.9 < depthCheckValue && depthCheckValue < 2.5){
+    if (1.9 < depthCheckValue && depthCheckValue < 2.5) {
         return true;
-    }
-    else{
+    } else {
         return false;
     }
 }
 
-void Operations::analyzeRhythm() {
+int Operations::analyzeRhythm() {
 
     simChosen = sim->getSimulation();
-
-    ui->changeRhythm(simChosen);
 
     //Timer for five seconds with voice prompt
     //For this timer, we could just make another function that calls the timer only then calls this function
     //A commented example will be at the bottom of the class
 
     if (simChosen == 1) {
-
-        normal();
-
+        //normal();
+        return 1;
     } else if (simChosen == 2 || simChosen == 3) {
-
-        shock();
-
+        //shock();
+        return 2;
     } else {
-
-        cpr();
-
+        //cpr();
+        return 3;
     }
 
 }
 
 void Operations::shock() {
-
-    if (successOfShock()) {
-
-        shockCount++;
-        //analyzeTimer() - only if you did class below example, and remove analyzeRhythm()
-        analyzeRhythm();
-
-    } else {
-
-        shockCount++;
-        cpr();
-
-    }
-
+    shockCount += 1;
 }
 
-//Need timer with voice prompts
 void Operations::cpr() {
 
-     if (cprCount == 4) {
-         ambulance();
-     }
-     cprCount++;
-     //timer to wait the twenty seconds and mimic compressions
+    srand(time(NULL));
+    int shockableRhythmReturns = rand() % 3 + 1;
+    if (shockableRhythmReturns == 1) {
+        setSuccess(false);
+    }
 
-     //analyzeTimer() - only if you did class below example, and remove analyzeRhythm()v
-     analyzeRhythm();
+     cprCount++;
 }
 
-bool Operations::successOfShock() {
+void Operations::successOfShock() {
 
     std::random_device rd;
     std::uniform_int_distribution<int> dist(1,4);
@@ -95,34 +74,62 @@ bool Operations::successOfShock() {
     int randomNumberShock2 = dist2(rd);
 
     if (shockCount == 0) {
-
         if (randomNumberShock == 1) {
             simChosen = 1;
-            return true;
+            setSuccess(true);
+            return;
         }
-
     } else if (shockCount == 1) {
-
         if (randomNumberShock1 ==  1) {
             simChosen = 1;
-            return true;
+            setSuccess(true);
+            return;
         }
-
     } else if (shockCount >  1 && shockCount < 4) {
-
         if (randomNumberShock2 ==  1) {
             simChosen = 1;
-            return true;
+            setSuccess(true);
+            return;
         }
-
+    } else if (shockCount == 4) {
+        simChosen = 1;
+        setSuccess(true);
+        return;
     } else {
-
         ambulance();
-
     }
+    setSuccess(false);
+    return;
 
-    return false;
+}
 
+bool Operations::getSuccess()
+{
+    return success;
+}
+
+void Operations::setSuccess(bool newState)
+{
+    success = newState;
+}
+
+int Operations::getShockCount()
+{
+    return shockCount;
+}
+
+int Operations::getCprCount()
+{
+    return cprCount;
+}
+
+void Operations::reset()
+{
+    depthCheckValue  = 0;
+    simChosen = 0;
+    success = false;
+    shockCount  = 0;
+    cprCount = 0;
 }
 
 void Operations::normal() {
@@ -136,11 +143,6 @@ void Operations::ambulance() {
     //Timer, voice prompt/print to console, and program ends - optional timer - 5 seconds
 
 }
-
-//void Operations::analyzeTimer() {
-    //calls timer for analyzing and then stopTimer() would call analyzeRhythm
-//Other comments what to change if you do this approach
-//}
 
 
 

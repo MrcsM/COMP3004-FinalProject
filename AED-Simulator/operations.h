@@ -1,10 +1,10 @@
 #ifndef OPERATIONS_H
 #define OPERATIONS_H
 
-#include "mainwindow.h"
 #include "Simulations.h"
+#include "stdlib.h"
 
-class Operations{
+class Operations {
 
     public:
 
@@ -12,29 +12,29 @@ class Operations{
         ~Operations();
 
         void upload();
-        bool depthCheck();
-        void analyzeRhythm();
+        bool depthCheck(float);
+        int analyzeRhythm();
         void shock();
         void cpr();
         void normal();
         void ambulance();
+        void successOfShock();
+        bool getSuccess();
+        void setSuccess(bool);
+        int getShockCount();
+        int getCprCount();
+        void reset();
 
      private:
 
         float depthCheckValue;
 
         Simulations *sim;
-        MainWindow *ui;
-
-        Timer *t;
-        Prompt *p;
 
         int simChosen;
         int shockCount;
         int cprCount;
         bool success;
-
-        bool successOfShock();
 
 
 };
