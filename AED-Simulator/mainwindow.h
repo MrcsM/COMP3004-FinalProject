@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QElapsedTimer>
+#include <random>
 #include "QDebug"
 #include "timer.h"
 #include "victim.h"
@@ -24,7 +25,6 @@ public:
 
 public slots:
     void indicatorLights();
-    void shockIndicator();
     void statusIndicator();
     void lcdDisplay();
     void heartButtonLight(bool);

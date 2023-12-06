@@ -14,6 +14,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->disabled_pass->setVisible(true);
     ui->pass_label->setVisible(false);
     ui->failed_label->setVisible(false);
+    ui->heart_label_discharged->setVisible(true);
+    ui->heart_label->setVisible(false);
 
     currentPrompt = Voice(OFF);
     powerState = false;
@@ -63,19 +65,9 @@ void MainWindow::indicatorLights() {
         ui->defibs_indicator->setStyleSheet(ui->defibs_indicator->styleSheet() + "background-color: rgb(51, 209, 122);");
     } else if (currentPrompt == Voice(DONT_TOUCH)) {
         ui->analyzing_indicator->setStyleSheet(ui->analyzing_indicator->styleSheet() + "background-color: rgb(51, 209, 122);");
-    } else if (currentPrompt == Voice(START_CPR)) {
+    } else if (currentPrompt == Voice(START_CPR) || currentPrompt == Voice(CONTINUE_CPR) || currentPrompt == Voice(GIVE_TWO_BREATHS) || currentPrompt == Voice(PUSH_HARDER) || currentPrompt == Voice(GOOD_COMPRESSIONS)) {
         ui->cpr_indicator->setStyleSheet(ui->cpr_indicator->styleSheet() + "background-color: rgb(51, 209, 122);");
     }
-};
-
-void MainWindow::shockIndicator() {
-    if (!powerState) {
-        ui->shock_indicator->setStyleSheet(ui->shock_indicator->styleSheet() + "background-color: rgb(164, 157, 157);");
-        return;
-    }
-    // if charged:
-    ui->shock_indicator->setStyleSheet(ui->shock_indicator->styleSheet() + "background-color: rgb(183, 197, 86);");
-    // if not: ui->shock_indicator->setStyleSheet(ui->shock_indicator->styleSheet() + "background-color: rgb(164, 157, 157);");
 };
 
 void MainWindow::statusIndicator() {
@@ -95,16 +87,15 @@ void MainWindow::statusIndicator() {
 
 void MainWindow::lcdDisplay() {
     if (powerState) {
+        // display the shock count, cpr count, elapsed time
         ui->shock_count->setText("SHOCK COUNT: " + QString::number(op->getShockCount()));
         ui->cpr_count->setText("CPR COUNT: " + QString::number(op->getCprCount()));
         ui->elapsed_time->setText("ELAPSED TIME: " + formatSeconds(t->getElapsedTime()));
 
-        // when bar graph for CPR depth of compressions is added, put here (need to add in mainwindow GUI first)
-        // when ECG waveform is added, put here (needs to be added in mainwindow GUI first)
-
         // get voice state and print it out
         ui->visual_prompt->setText(p->playVoicePrompt(currentPrompt));
     } else {
+        // huge reset
         ui->shock_count->setText("");
         ui->cpr_count->setText("");
         ui->elapsed_time->setText("");
@@ -116,44 +107,15 @@ void MainWindow::lcdDisplay() {
 // so when shock, call heartButtonLight(true), right after heartButtonLight(false)
 void MainWindow::heartButtonLight(bool shock) {
     if (shock) {
-        ui->shock_indicator->setStyleSheet(ui->on_label->styleSheet() + "background-color: rgb(51, 209, 122);");
+        ui->shock_indicator->setStyleSheet(ui->shock_indicator->styleSheet() + "background-color: rgb(51, 209, 122);");
+        ui->heart_label_discharged->setVisible(false);
+        ui->heart_label->setVisible(true);
     } else {
-        ui->shock_indicator->setStyleSheet(ui->on_label->styleSheet() + "background-color: rgb(164, 157, 157);");
+        ui->shock_indicator->setStyleSheet(ui->shock_indicator->styleSheet() + "background-color: rgb(164, 157, 157);");
+        ui->heart_label_discharged->setVisible(true);
+        ui->heart_label->setVisible(false);
     }
 };
-
-/*
-    if (!powerState) {
-        currentPrompt = Voice(OFF);
-        return;
-    }
-
-    if (currentPrompt == Voice(OFF)) {
-        currentPrompt = Voice(UNIT_OK);
-    } else if (currentPrompt == Voice(UNIT_OK)) {
-        currentPrompt = Voice(STAY_CALM);
-    } else if (currentPrompt == Voice(STAY_CALM)) {
-        currentPrompt = Voice(CHECK_RESPONSIVENESS);
-    } else if (currentPrompt == Voice(CHECK_RESPONSIVENESS)) {
-        currentPrompt = Voice(CALL_FOR_HELP);
-    } else if (currentPrompt == Voice(CALL_FOR_HELP)) {
-        currentPrompt = Voice(ATTACH_DEFIB);
-    } else if (currentPrompt == Voice(ATTACH_DEFIB)) {
-        currentPrompt = Voice(ADULT_PADS);
-    } else if (currentPrompt == Voice(ADULT_PADS)) {
-        currentPrompt = Voice(DONT_TOUCH);
-    } else if (currentPrompt == Voice(DONT_TOUCH)) {
-        currentPrompt = Voice(SHOCK_ADVISED);
-    } else if (currentPrompt == Voice(SHOCK_ADVISED)) {
-        currentPrompt = Voice(SHOCK_DELIVERED);
-    } else if (currentPrompt == Voice(SHOCK_DELIVERED)) {
-        currentPrompt = Voice(START_CPR);
-    } else if (currentPrompt == Voice(START_CPR)) {
-        currentPrompt = Voice(CHECK_RESPONSIVENESS);
-    }
-
-    QTimer::singleShot(1000, this, &MainWindow::cycle);
-*/
 
 void MainWindow::MainTimer_TimeOut_Event_Slot()
 {
@@ -163,6 +125,7 @@ void MainWindow::MainTimer_TimeOut_Event_Slot()
     }
 
     // PERFORM SELF TEST
+    // if it fails here, we need it to stop here and turn off
     if (mainCount == 3) {
 
     }
@@ -231,7 +194,7 @@ void MainWindow::MainTimer_TimeOut_Event_Slot()
     }
 
     if (mainCount == 42) {
-        //heartButtonLight(true);   HEART BUTTON LIGHT SEEMS TO BE BROKEN GRAPHICALLY
+        heartButtonLight(true);
     }
 
     // DO SHOCKING AFTER 5 SECONDS
@@ -239,7 +202,7 @@ void MainWindow::MainTimer_TimeOut_Event_Slot()
         currentPrompt = Voice(SHOCK_DELIVERED);
         op->shock();
         op->successOfShock(); //performs op->setSuccess(true);
-        //heartButtonLight(false);
+        heartButtonLight(false);
         mainCount = 32; // RETURN TO START OF SCAN
     }
 
@@ -271,8 +234,8 @@ void MainWindow::MainTimer_TimeOut_Event_Slot()
     }
 
     lcdDisplay();
-    shockIndicator();
     indicatorLights();
+    changeRhythm(getComboBoxSelection());
     mainCount += 1;
 
 }
@@ -300,9 +263,9 @@ void MainWindow::on_power_button_clicked()
         ui->off_label->setStyleSheet(ui->off_label->styleSheet() + "color: rgb(51, 209, 122);");
 
         lcdDisplay();
-        shockIndicator();
         indicatorLights();
         statusIndicator();
+        ui->rhythmImage->clear();
         op->reset();
 
         t->setPoweredOffToTrue();
@@ -325,29 +288,35 @@ void MainWindow::makeVictim()
 
 void MainWindow::changeRhythm(int rhythm) {
 
-   QPixmap normal("me/student/COMP3004-FinalProject-main/AED-Simulator/images/normal.png");
-   QPixmap vfib("me/student/COMP3004-FinalProject-main/AED-Simulator/images/vfib.jpeg");
-   QPixmap vtach("me/student/COMP3004-FinalProject-main/AED-Simulator/images/vtach.jpeg");
-   QPixmap afib("me/student/COMP3004-FinalProject-main/AED-Simulator/images/afib.jpeg");
+   QPixmap normal(":/images/images/normal.png");
+   QPixmap vfib(":/images/images/vfib.png");
+   QPixmap vtach(":/images/images/vtach.png");
+   QPixmap afib(":/images/images/afib.jpeg");
    int width = ui->rhythmImage->width();
    int height = ui->rhythmImage->height();
 
    if (rhythm == 1) {
 
-       ui->rhythmImage->setPixmap(normal.scaled(width,height,Qt::KeepAspectRatio));
+       ui->rhythmImage->setPixmap(normal.scaled(width,height));
 
    } else if (rhythm == 2) {
 
-       ui->rhythmImage->setPixmap(vfib.scaled(width,height,Qt::KeepAspectRatio));
+       ui->rhythmImage->setPixmap(vfib.scaled(width,height));
 
    } else if (rhythm == 3) {
 
-       ui->rhythmImage->setPixmap(vtach.scaled(width,height,Qt::KeepAspectRatio));
+       ui->rhythmImage->setPixmap(vtach.scaled(width,height));
 
    } else if (rhythm == 4) {
 
-       ui->rhythmImage->setPixmap(afib.scaled(width,height,Qt::KeepAspectRatio));
+       ui->rhythmImage->setPixmap(afib.scaled(width,height));
 
+   } else {
+       std::random_device rd;
+       std::uniform_int_distribution<int> dist(1,4);
+
+
+       changeRhythm(dist(rd));
    }
 
 }
