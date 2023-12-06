@@ -5,8 +5,16 @@
         <file>images/grayed_out_x.png</file>
         <file>images/x.png</file>
         <file>images/normal.png</file>
-        <file>images/vfib.jpeg</file>
-        <file>images/vtach.jpeg</file>
         <file>images/afib.jpeg</file>
+        <file>images/vfib.png</file>
+        <file>images/vtach.png</file>
+        <file>images/analyzing.png</file>
+        <file>images/attach_defibs.png</file>
+        <file>images/call_for_help.png</file>
+        <file>images/cpr_1.png</file>
+        <file>images/cpr_2.png</file>
+        <file>images/responsiveness.png</file>
+        <file>images/grayed_out_heart.png</file>
+        <file>images/heart.png</file>
     </qresource>
 </RCC>
