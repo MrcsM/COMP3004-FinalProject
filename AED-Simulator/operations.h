@@ -23,6 +23,8 @@ class Operations {
         void setSuccess(bool);
         int getShockCount();
         int getCprCount();
+        bool firstAnalysisComplete();
+        void setFirstAnalysisComplete();
         void reset();
 
      private:
@@ -35,6 +37,7 @@ class Operations {
         int shockCount;
         int cprCount;
         bool success;
+        bool firstAnalysis;
 
 
 };

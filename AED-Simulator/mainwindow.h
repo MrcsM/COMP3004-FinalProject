@@ -10,6 +10,7 @@
 #include "prompt.h"
 #include "operations.h"
 #include "Simulations.h"
+#include "Safety.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -41,6 +42,7 @@ private:
     Prompt *p;
     Simulations *sim;
     Operations *op;
+    Safety *safety;
 
     QTimer *mainTimer;
     int mainCount;

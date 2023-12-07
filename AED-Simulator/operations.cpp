@@ -98,6 +98,7 @@ void Operations::successOfShock() {
     } else {
         ambulance();
     }
+
     setSuccess(false);
     return;
 
@@ -130,6 +131,15 @@ void Operations::reset()
     success = false;
     shockCount  = 0;
     cprCount = 0;
+    firstAnalysis = false;
+}
+
+bool Operations::firstAnalysisComplete() {
+    return firstAnalysis;
+}
+
+void Operations::setFirstAnalysisComplete() {
+    firstAnalysis = true;
 }
 
 void Operations::normal() {

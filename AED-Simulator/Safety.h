@@ -5,7 +5,7 @@
 
 class Safety: public Victim {
     public:
-        bool runSelfTest();
+        void runSelfTest(bool);
         bool isCableattached();
         bool isChild(int weight, int age);
         bool isTouching();

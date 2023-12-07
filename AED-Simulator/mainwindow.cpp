@@ -36,6 +36,7 @@ MainWindow::MainWindow(QWidget *parent)
     t = new Timer();
     sim = new Simulations();
     op = new Operations();
+    safety = new Safety();
 
     ui->rhythmcomboBox->addItem("Normal");
     ui->rhythmcomboBox->addItem("Vfib");
@@ -72,8 +73,6 @@ void MainWindow::indicatorLights() {
 
 void MainWindow::statusIndicator() {
     if (powerState) {
-        // if self test passes, whats below is what would show (requires Simulations)
-        //currentPrompt = Voice(UNIT_OK);
         ui->pass_label->setVisible(true);
         ui->disabled_pass->setVisible(false);
         ui->disabled_failed->setVisible(true);
@@ -124,19 +123,30 @@ void MainWindow::MainTimer_TimeOut_Event_Slot()
         makeVictim();
     }
 
-    // PERFORM SELF TEST
-    // if it fails here, we need it to stop here and turn off
     if (mainCount == 3) {
+        ui->self_test->hide();
 
+        if (ui->self_test->checkState() == Qt::Checked) {
+            safety->runSelfTest(false);
+        } else {
+            safety->runSelfTest(true);
+        }
     }
 
-    // BEGIN PROPER OPERATION
-    if (mainCount >= 5) {
-        statusIndicator();
-    }
-
+    // DO SELF TEST CHECK THEN BEGIN PROPER OPERATION
     if (mainCount == 5) {
-        currentPrompt = Voice(UNIT_OK);
+        if (safety->getFailed()) {
+            currentPrompt = Voice(UNIT_FAILED);
+            mainCount = 95;
+
+            ui->pass_label->setVisible(false);
+            ui->failed_label->setVisible(true);
+            ui->disabled_pass->setVisible(true);
+            ui->disabled_failed->setVisible(false);
+        } else {
+            currentPrompt = Voice(UNIT_OK);
+            statusIndicator();
+        }
     }
 
     if (mainCount == 7) {
@@ -164,19 +174,17 @@ void MainWindow::MainTimer_TimeOut_Event_Slot()
     } else if (mainCount == 30 && ((v->getAge() == 'A' && ui->PadsChoice->currentIndex() == 1) || (v->getAge() == 'C' && ui->PadsChoice->currentIndex() == 0))) {
         // MISMATCH
         mainCount = 21; // RETURN TO BEGINNING OF STEP
+        currentPrompt = Voice(CHECK_PADS);
     }
 
     if (mainCount == 35) {
         currentPrompt = Voice(DONT_TOUCH);
+        op->setFirstAnalysisComplete();
     }
 
     // DETERMINE IF SHOCK ADVISED
     if (mainCount == 40) {
-        if (op->getSuccess() == false) {
-            sim->pickTest(ui->rhythmcomboBox->currentIndex() + 1);
-        } else if (op->getSuccess() == true) {
-            sim->pickTest(1);
-        }
+        sim->pickTest(ui->rhythmcomboBox->currentIndex() + 1); // regardless of whether the shock was successful, if the victim is vfib'n again right after a successful one it needs to be caught
 
         int simSuccess = sim->getSimulation();
 
@@ -202,6 +210,13 @@ void MainWindow::MainTimer_TimeOut_Event_Slot()
         currentPrompt = Voice(SHOCK_DELIVERED);
         op->shock();
         op->successOfShock(); //performs op->setSuccess(true);
+
+        if (op->getSuccess()) { // switch back to normal rhythm because shock was successful
+            ui->rhythmcomboBox->setCurrentText("Normal");
+            sim->pickTest(1);
+            changeRhythm(1);
+        }
+
         heartButtonLight(false);
         mainCount = 32; // RETURN TO START OF SCAN
     }
@@ -228,16 +243,36 @@ void MainWindow::MainTimer_TimeOut_Event_Slot()
     }
 
 
-    if (mainCount == 95) {
+    if (mainCount == 94) {
         currentPrompt = Voice(AMBULANCE_ARRIVES);
-        // Turn off?
+    }
+
+    if (mainCount == 95) {
+        t->setPoweredOffToTrue(); // so the final 5 second countdown starts here
+    }
+
+    if (mainCount == 100) {
+        mainTimer->stop();
+        powerState = false;
+        ui->on_label->setStyleSheet(ui->on_label->styleSheet() + "color: rgb(164, 157, 157);");
+        ui->off_label->setStyleSheet(ui->off_label->styleSheet() + "color: rgb(51, 209, 122);");
+
+        lcdDisplay();
+        indicatorLights();
+        statusIndicator();
+        ui->rhythmImage->clear();
+        op->reset();
+        ui->self_test->show();
     }
 
     lcdDisplay();
     indicatorLights();
-    changeRhythm(getComboBoxSelection());
-    mainCount += 1;
 
+    if (op->firstAnalysisComplete()) {
+        changeRhythm(getComboBoxSelection());
+    }
+
+    mainCount += 1;
 }
 
 
@@ -269,6 +304,7 @@ void MainWindow::on_power_button_clicked()
         op->reset();
 
         t->setPoweredOffToTrue();
+        ui->self_test->show();
     }
 }
 
@@ -287,6 +323,11 @@ void MainWindow::makeVictim()
 }
 
 void MainWindow::changeRhythm(int rhythm) {
+
+  if (!powerState || !op->firstAnalysisComplete()) {
+      ui->rhythmImage->clear();
+      return;
+  }
 
    QPixmap normal(":/images/images/normal.png");
    QPixmap vfib(":/images/images/vfib.png");

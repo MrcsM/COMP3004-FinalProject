@@ -38,7 +38,7 @@ QString Prompt::playVoicePrompt(Voice v) {
         return "Attach defibrillation pads to the victim's bare chest";
         break;
     case CHECK_PADS:
-        return "Check defibrillation pads. Electrodes are either faulty or no good contact has been made.";
+        return "Check defibrillation pads. Ensure electrodes are in working condition, good contact is made, and the proper pads are being used.";
         break;
     case ADULT_PADS:
         return "Adult electrode pads have been detected. Defibrillation energy settings have been adjusted accordingly.";

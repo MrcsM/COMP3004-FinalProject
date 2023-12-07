@@ -674,7 +674,7 @@ color: rgb(164, 157, 157);</string>
      <rect>
       <x>170</x>
       <y>810</y>
-      <width>241</width>
+      <width>201</width>
       <height>31</height>
      </rect>
     </property>
@@ -696,7 +696,7 @@ color: rgb(164, 157, 157);</string>
      <rect>
       <x>170</x>
       <y>860</y>
-      <width>241</width>
+      <width>201</width>
       <height>31</height>
      </rect>
     </property>
@@ -716,9 +716,9 @@ color: rgb(164, 157, 157);</string>
    <widget class="QWidget" name="formLayoutWidget_3">
     <property name="geometry">
      <rect>
-      <x>430</x>
+      <x>380</x>
       <y>810</y>
-      <width>241</width>
+      <width>184</width>
       <height>31</height>
      </rect>
     </property>
@@ -738,9 +738,9 @@ color: rgb(164, 157, 157);</string>
    <widget class="QWidget" name="formLayoutWidget_4">
     <property name="geometry">
      <rect>
-      <x>430</x>
+      <x>380</x>
       <y>860</y>
-      <width>241</width>
+      <width>181</width>
       <height>31</height>
      </rect>
     </property>
@@ -757,6 +757,19 @@ color: rgb(164, 157, 157);</string>
      </item>
     </layout>
    </widget>
+   <widget class="QCheckBox" name="self_test">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>780</y>
+      <width>111</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Fail Self Test</string>
+    </property>
+   </widget>
    <zorder>frame</zorder>
    <zorder>power_button</zorder>
    <zorder>status_indicator</zorder>
@@ -766,6 +779,7 @@ color: rgb(164, 157, 157);</string>
    <zorder>formLayoutWidget_2</zorder>
    <zorder>formLayoutWidget_3</zorder>
    <zorder>formLayoutWidget_4</zorder>
+   <zorder>self_test</zorder>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>

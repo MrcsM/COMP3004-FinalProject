@@ -12,8 +12,9 @@ bool Safety::getFailed(){
     return failed;
 }
 
-bool Safety::runSelfTest(){
-
+// there was supposed to be so much more here, we just did not use
+void Safety::runSelfTest(bool pass){
+    failed = !pass;
 }
 
 bool Safety::isCableattached(){
