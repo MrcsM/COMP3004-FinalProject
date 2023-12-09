@@ -14,4 +14,4 @@ Group:
 
 note for group:
 - please use branches & pr's when makin changes so we don't clog each other 
-- ill add the rest of the stuff here later
+- ill add the rest of the stuff here later & fix the formatting because this suck
