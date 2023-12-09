@@ -91,6 +91,9 @@ QString Prompt::playVoicePrompt(Voice v) {
     case AMBULANCE_ARRIVES:
         return "Ambulance has arrived. Leave job to paramedics.";
         break;
+    case NORMAL_RHYTHM:
+        return "Normal Rhythm detected. Re-analyzing, do not touch the victim.";
+        break;
     case OFF:
         return "";
         break;

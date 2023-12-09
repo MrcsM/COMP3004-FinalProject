@@ -24,7 +24,6 @@ public:
     char getAge();
     char getSex();
     void randomizeVictim();
-    void printVictim();
 private:
     int weight;
     char age;

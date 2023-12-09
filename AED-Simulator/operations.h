@@ -13,11 +13,8 @@ class Operations {
 
         void upload();
         bool depthCheck(float);
-        int analyzeRhythm();
         void shock();
         void cpr();
-        void normal();
-        void ambulance();
         void successOfShock();
         bool getSuccess();
         void setSuccess(bool);

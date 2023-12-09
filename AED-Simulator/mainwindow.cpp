@@ -25,6 +25,7 @@ MainWindow::MainWindow(QWidget *parent)
     mainTimer->setInterval(1000);
     mainCount = 0;
     depthCheck = false;
+    nothingHappens = 0;
 
     ui->VictimChoice->addItem("Adult");
     ui->VictimChoice->addItem("Child");
@@ -121,6 +122,7 @@ void MainWindow::MainTimer_TimeOut_Event_Slot()
     // START
     if (mainCount == 0) {
         makeVictim();
+        //v->randomizeVictim() - if we wanted to we could!
     }
 
     if (mainCount == 3) {
@@ -188,10 +190,16 @@ void MainWindow::MainTimer_TimeOut_Event_Slot()
 
         int simSuccess = sim->getSimulation();
 
-        if (op->getCprCount() == 5 || op->getShockCount() == 5) {
-            // normal: skip to ambulance arrives
+        if (simSuccess == 1) {
+            nothingHappens++;
+        } else {
+            nothingHappens = 0;
+        }
+
+        if (nothingHappens == 5 || op->getCprCount() == 5 || op->getShockCount() == 5) {
+            // normal 5 straight times/too many cpr/shocks: skip to ambulance arrives
             mainCount = 90;
-        } else if (simSuccess == 1 || simSuccess == 4) {
+        } else if (simSuccess == 4) {
             // cpr: skip to cpr
             currentPrompt = Voice(NO_SHOCK_ADVISED);
             mainCount = 55;
@@ -199,6 +207,11 @@ void MainWindow::MainTimer_TimeOut_Event_Slot()
             // shock: deliver shock
             currentPrompt = Voice(SHOCK_ADVISED);
         }
+    }
+
+    if (mainCount == 41 && sim->getSimulation() == 1) {
+        mainCount = 33; // back to analyze
+        currentPrompt = Voice(NORMAL_RHYTHM);
     }
 
     if (mainCount == 42) {
@@ -211,10 +224,10 @@ void MainWindow::MainTimer_TimeOut_Event_Slot()
         op->shock();
         op->successOfShock(); //performs op->setSuccess(true);
 
-        if (op->getSuccess()) { // switch back to normal rhythm because shock was successful
-            ui->rhythmcomboBox->setCurrentText("Normal");
-            sim->pickTest(1);
-            changeRhythm(1);
+        if (op->getSuccess()) { // switch back to unknown rhythm because shock was successful & we don't want go straight ambulance
+            ui->rhythmcomboBox->setCurrentText("Unknown");
+            sim->pickTest(4);
+            changeRhythm(4);
         }
 
         heartButtonLight(false);

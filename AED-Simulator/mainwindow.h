@@ -51,6 +51,8 @@ private:
     bool powerState;
     bool depthCheck;
 
+    int nothingHappens;
+
 private slots:
 
     QString formatSeconds(int seconds) {

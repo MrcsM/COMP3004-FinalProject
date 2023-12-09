@@ -26,27 +26,6 @@ bool Operations::depthCheck(float uiDepth){
     }
 }
 
-int Operations::analyzeRhythm() {
-
-    simChosen = sim->getSimulation();
-
-    //Timer for five seconds with voice prompt
-    //For this timer, we could just make another function that calls the timer only then calls this function
-    //A commented example will be at the bottom of the class
-
-    if (simChosen == 1) {
-        //normal();
-        return 1;
-    } else if (simChosen == 2 || simChosen == 3) {
-        //shock();
-        return 2;
-    } else {
-        //cpr();
-        return 3;
-    }
-
-}
-
 void Operations::shock() {
     shockCount += 1;
 }
@@ -95,8 +74,6 @@ void Operations::successOfShock() {
         simChosen = 1;
         setSuccess(true);
         return;
-    } else {
-        ambulance();
     }
 
     setSuccess(false);
@@ -140,18 +117,6 @@ bool Operations::firstAnalysisComplete() {
 
 void Operations::setFirstAnalysisComplete() {
     firstAnalysis = true;
-}
-
-void Operations::normal() {
-
-    //Timer, voice prompt/print to console, and program ends - optional timer - 5 seconds
-
-}
-
-void Operations::ambulance() {
-
-    //Timer, voice prompt/print to console, and program ends - optional timer - 5 seconds
-
 }
 
 

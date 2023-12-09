@@ -1,11 +1,8 @@
 #include "Safety.h"
 
+// change this stuff later so battery is actually used
 bool Safety::getBatteryCharged(){
     return batteryCharged;
-}
-
-bool Safety::getCablePluggedIn(){
-    return cablePluggedIn;
 }
 
 bool Safety::getFailed(){
@@ -15,25 +12,4 @@ bool Safety::getFailed(){
 // there was supposed to be so much more here, we just did not use
 void Safety::runSelfTest(bool pass){
     failed = !pass;
-}
-
-bool Safety::isCableattached(){
-    return cableAttached;
-}
-bool Safety::isChild(int weight, int age){
-    if(age <= 8 || weight < 55){
-        return true;
-    }
-    else{
-        return false;
-    }
-}
-bool Safety::isTouching(){
-    return touching;
-}
-bool Safety::isWet(){
-    return wet;
-}
-bool Safety::safeEnvironment(){
-    return safe;
 }

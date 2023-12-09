@@ -63,8 +63,3 @@ void Victim::randomizeVictim()
     }
 
 }
-
-void Victim::printVictim()
-{
-    qDebug() << "Weight: " << weight << "\nAge:"  << age << "\nSex:" << sex << "\n";
-}
