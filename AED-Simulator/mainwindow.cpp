@@ -26,6 +26,9 @@ MainWindow::MainWindow(QWidget *parent)
     mainCount = 0;
     depthCheck = false;
     nothingHappens = 0;
+    batteryHealth = 100;
+    batteryMinus = false;
+    afterShock = false;
 
     ui->VictimChoice->addItem("Adult");
     ui->VictimChoice->addItem("Child");
@@ -91,6 +94,7 @@ void MainWindow::lcdDisplay() {
         ui->shock_count->setText("SHOCK COUNT: " + QString::number(op->getShockCount()));
         ui->cpr_count->setText("CPR COUNT: " + QString::number(op->getCprCount()));
         ui->elapsed_time->setText("ELAPSED TIME: " + formatSeconds(t->getElapsedTime()));
+        ui->batteryLabel->setText("BATTERY HEALTH: " + QString::number(batteryHealth) + "%");
 
         // get voice state and print it out
         ui->visual_prompt->setText(p->playVoicePrompt(currentPrompt));
@@ -99,6 +103,8 @@ void MainWindow::lcdDisplay() {
         ui->shock_count->setText("");
         ui->cpr_count->setText("");
         ui->elapsed_time->setText("");
+        ui->batteryLabel->setText("");
+        ui->visual_prompt->setText("");
         ui->visual_prompt->setText("");
     }
 };
@@ -188,6 +194,10 @@ void MainWindow::MainTimer_TimeOut_Event_Slot()
     if (mainCount == 40) {
         sim->pickTest(ui->rhythmcomboBox->currentIndex() + 1); // regardless of whether the shock was successful, if the victim is vfib'n again right after a successful one it needs to be caught
 
+        if (batteryHealth < 35) {
+            currentPrompt = Voice(CHANGE_BATTERIES);
+        }
+
         int simSuccess = sim->getSimulation();
 
         if (simSuccess == 1) {
@@ -205,7 +215,18 @@ void MainWindow::MainTimer_TimeOut_Event_Slot()
             mainCount = 55;
         } else if (simSuccess == 2 || simSuccess == 3) {
             // shock: deliver shock
-            currentPrompt = Voice(SHOCK_ADVISED);
+
+            if (afterShock == true) {
+                currentPrompt = Voice(START_CPR);
+                afterShock = false;
+                mainCount = 55;
+            } else {
+
+                currentPrompt = Voice(SHOCK_ADVISED);
+                afterShock = true;
+
+            }
+
         }
     }
 
@@ -222,17 +243,23 @@ void MainWindow::MainTimer_TimeOut_Event_Slot()
     if (mainCount == 45) {
         currentPrompt = Voice(SHOCK_DELIVERED);
         op->shock();
+        batteryHealth = batteryHealth - 20;
         op->successOfShock(); //performs op->setSuccess(true);
 
         if (op->getSuccess()) { // switch back to unknown rhythm because shock was successful & we don't want go straight ambulance
             ui->rhythmcomboBox->setCurrentText("Unknown");
             sim->pickTest(4);
-            changeRhythm(4);
+            changeRhythm(1);
+        }
+
+        if (batteryHealth < 40) {
+            currentPrompt = Voice(CHANGE_BATTERIES);
         }
 
         heartButtonLight(false);
         mainCount = 32; // RETURN TO START OF SCAN
     }
+
 
     // START OF CPR
     if (mainCount == 60) {
@@ -286,6 +313,16 @@ void MainWindow::MainTimer_TimeOut_Event_Slot()
     }
 
     mainCount += 1;
+    batteryChange();
+
+    if (batteryHealth < 10 && mainCount < 94) {
+        mainCount = 95;
+        currentPrompt = Voice(CHANGE_BATTERIES);
+    }
+
+    if (batteryHealth <= 0) {
+        mainCount = 100;
+    }
 }
 
 
@@ -407,3 +444,21 @@ int MainWindow::getComboBoxSelection() {
 
 }
 
+
+void MainWindow::on_batteryButton_clicked()
+{
+
+    batteryHealth = 100;
+    currentPrompt = Voice(NEW_BATTERIES);
+}
+
+void MainWindow::batteryChange() {
+
+    if (batteryMinus == true) {
+        batteryHealth--;
+        batteryMinus = false;
+    } else {
+        batteryMinus = true;
+    }
+
+}

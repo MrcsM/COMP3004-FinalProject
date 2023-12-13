@@ -66,9 +66,9 @@
      <widget class="QLabel" name="elapsed_time">
       <property name="geometry">
        <rect>
-        <x>230</x>
+        <x>250</x>
         <y>0</y>
-        <width>201</width>
+        <width>181</width>
         <height>20</height>
        </rect>
       </property>
@@ -143,6 +143,22 @@
       </property>
       <property name="text">
        <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="batteryLabel">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>0</y>
+        <width>161</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
       </property>
      </widget>
     </widget>
@@ -770,6 +786,19 @@ color: rgb(164, 157, 157);</string>
      <string>Fail Self Test</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="batteryButton">
+    <property name="geometry">
+     <rect>
+      <x>680</x>
+      <y>830</y>
+      <width>161</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Replace Battery</string>
+    </property>
+   </widget>
    <zorder>frame</zorder>
    <zorder>power_button</zorder>
    <zorder>status_indicator</zorder>
@@ -780,6 +809,7 @@ color: rgb(164, 157, 157);</string>
    <zorder>formLayoutWidget_3</zorder>
    <zorder>formLayoutWidget_4</zorder>
    <zorder>self_test</zorder>
+   <zorder>batteryButton</zorder>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
