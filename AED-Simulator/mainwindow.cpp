@@ -316,6 +316,7 @@ void MainWindow::MainTimer_TimeOut_Event_Slot()
     batteryChange();
 
     if (batteryHealth <= 0) {
+        t->setPoweredOffToTrue();
         mainCount = 100;
     }
 }
@@ -442,7 +443,6 @@ int MainWindow::getComboBoxSelection() {
 
 void MainWindow::on_batteryButton_clicked()
 {
-
     batteryHealth = 100;
     currentPrompt = Voice(NEW_BATTERIES);
 }
