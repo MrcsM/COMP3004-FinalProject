@@ -11,6 +11,7 @@ AED Simulator for COMP3004: Object-Oriented Software Engineering - Fall 2023
         - State Diagrams
         - Traceability Matrix
         - Use Cases
+        - Textual Explanation
         - Link to Video Demonstration: [insert here](https://www.youtube.com/watch?v=hGaIm3vWhxE)
 - build-AED-Simulator-Desktop-Debug
     - debug stuff
