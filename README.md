@@ -22,16 +22,22 @@ AED Simulator for COMP3004: Object-Oriented Software Engineering - Fall 2023
     - UI (Primary Design)
     - Program Logic (MainWindow, Prompts)
     - Traceability Matrix
+    - Polishing Work
+    - README (most of it)
 - Jared Best
-    - UI (Rhythm Images)
-    - Program Logic (Operations, Safety, Simulations)
+    - UI (Rhythm Images, tests comboBox, battery)
+    - Rough Draft 
+    - Program Logic (MainWindow, Operations, Safety, Simulations)
     - UML Class Diagram
+    - Polishing Work
 - Matthew Parsons
     - Program Logic (Operations, Safety, Simulations)
     - Use Cases
     - State Diagrams
+    - Textual Explanation
 - Alejandro Ferreira
-    - UI (Combo Boxes for Tests)
-    - Program Logic (MainWindow, Timer, Victim)
+    - UI (victim/pads comboBox)
+    - Program Logic (MainWindow {timer}, Timer, Victim)
     - Sequence Diagrams
     - Video Demonstration
+    - README (added onto it)
