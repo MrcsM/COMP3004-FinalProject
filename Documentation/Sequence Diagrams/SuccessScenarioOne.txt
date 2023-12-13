@@ -53,13 +53,7 @@ MainWindowTimer->Operations: shock()
 note over Operations: shockCount += 1;
 MainWindowTimer->Operations: successOfShock()
 note over Operations: random chance fail: setSuccess(false)
-note over MainWindowTimer: repeat 3x more times, the last of these finally succeeds
-note over Operations: so setSuccess(true); also shockCount is now 4
-MainWindowTimer->(3)MainWindow: currentPrompt = Voice(DONT_TOUCH)   [part of lcdDisplay()]
-MainWindow->prompts: playVoicePrompt(currentPrompt)
-MainWindowTimer->(5)Operations:getSuccess()
-MainWindowTimer<-Operations: return true
-MainWindowTimer->Simulations: pickTest(1)
+note over Operations: shockCount is now 1
 note over MainWindowTimer: neither getShockCount() nor getCprCount() is 5 yet, so ambulance still hasn't arrived
 note over MainWindowTimer: if test is 1 or 4, then do CPR: it is 1
 MainWindowTimer->(5)MainWindow: currentPrompt = Voice(START_CPR)   [part of lcdDisplay()]
@@ -90,7 +84,7 @@ MainWindow->prompts: playVoicePrompt(currentPrompt)
 MainWindowTimer->(5)Operations:getSuccess()
 MainWindowTimer<-Operations: return true
 MainWindowTimer->Simulations: pickTest(1)
-note over MainWindowTimer: getShockCount() is only 4, but getCprCount() is 5, so ambulance has arrived
+note over MainWindowTimer: getShockCount() is only 1, but getCprCount() is 5, so ambulance has arrived
 MainWindowTimer->(5)MainWindow: currentPrompt = Voice(AMBULANCE_ARRIVES)   [part of lcdDisplay()]
 MainWindow->prompts: playVoicePrompt(currentPrompt)
 note over MainWindowTimer: End of Main Process.
