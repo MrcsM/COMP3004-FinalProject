@@ -315,11 +315,6 @@ void MainWindow::MainTimer_TimeOut_Event_Slot()
     mainCount += 1;
     batteryChange();
 
-    if (batteryHealth < 10 && mainCount < 94) {
-        mainCount = 95;
-        currentPrompt = Voice(CHANGE_BATTERIES);
-    }
-
     if (batteryHealth <= 0) {
         mainCount = 100;
     }
