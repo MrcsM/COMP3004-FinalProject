@@ -1,0 +1,52 @@
+title Safety Scenario 2 - Mismatched Pads and Victim
+
+participant User
+participant MainWindowTimer
+participant GUI
+participant MainWindow
+participant Operations
+participant Victim
+participant Simulations
+participant prompts
+
+User-->GUI: Sets VictimChoice selection box to 'Adult'
+User-->GUI: Clicks Power Button
+GUI->MainWindow: on_power_button_clicked()
+MainWindowTimer<-MainWindow: start()
+MainWindow->Operations: setSuccess(false)
+note over MainWindowTimer: makeVictim()
+MainWindowTimer->Victim: setAge('C')
+note over MainWindowTimer: perform self test
+MainWindowTimer->(5)MainWindow: currentPrompt = Voice(UNIT_OK)   [part of lcdDisplay()]
+MainWindow->prompts: playVoicePrompt(currentPrompt)
+MainWindowTimer->(2)MainWindow: currentPrompt = Voice(STAY_CALM)   [part of lcdDisplay()]
+MainWindow->prompts: playVoicePrompt(currentPrompt)
+MainWindowTimer->(2)MainWindow: currentPrompt = Voice(CHECK_RESPONSIVENESS)   [part of lcdDisplay()]
+MainWindow->prompts: playVoicePrompt(currentPrompt)
+MainWindowTimer->(6)MainWindow: currentPrompt = Voice(CALL_FOR_HELP)   [part of lcdDisplay()]
+MainWindow->prompts: playVoicePrompt(currentPrompt)
+note over MainWindowTimer: Pads Section Starts
+MainWindowTimer->(5)MainWindow: currentPrompt = Voice(ATTACH_DEFIB)   [part of lcdDisplay()]
+MainWindow->prompts: playVoicePrompt(currentPrompt)
+User-->(5)GUI: Sets PadsChoice selection box to 'Adult'
+note over MainWindowTimer: 'C' from VictimChoice and 'A' from Pads Choice DON'T match
+note over MainWindowTimer: winds itself back to start of step
+User-->(5)GUI: Sets PadsChoice selection box to 'Child'
+note over MainWindowTimer: 'C' from VictimChoice and 'C' from Pads Choice match
+MainWindowTimer->MainWindow: currentPrompt = Voice(CHILD_PADS)   [part of lcdDisplay()]
+MainWindow->prompts: playVoicePrompt(currentPrompt)
+note over MainWindowTimer: Pads section ends here
+note over MainWindowTimer: Continues.
+
+
+
+
+
+
+
+
+
+
+
+
+

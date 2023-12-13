@@ -33,6 +33,7 @@ public slots:
     int getComboBoxSelection();
     void makeVictim();
     void on_power_button_clicked();
+    void batteryChange();
 
 private:
     Ui::MainWindow *ui;
@@ -50,8 +51,11 @@ private:
     Voice currentPrompt;
     bool powerState;
     bool depthCheck;
+    bool batteryMinus;
+    bool afterShock;
 
     int nothingHappens;
+    int batteryHealth;
 
 private slots:
 
@@ -77,5 +81,6 @@ private slots:
         return format;
     }
     void MainTimer_TimeOut_Event_Slot();
+    void on_batteryButton_clicked();
 };
 #endif // MAINWINDOW_H

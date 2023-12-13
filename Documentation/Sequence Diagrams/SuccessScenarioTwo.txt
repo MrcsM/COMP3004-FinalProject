@@ -1,0 +1,28 @@
+title Success Scenario 2 - Maintenance
+
+participant User
+participant MainWindowTimer
+participant GUI
+participant MainWindow
+participant prompts
+
+User-->GUI: Sets VictimChoice selection box to 'Adult'
+User-->(5)GUI: Holds Power Button for 5 seconds
+GUI->MainWindow: on_power_button_pressed()
+note over MainWindowTimer: perform self test
+MainWindowTimer->(5)MainWindow: currentPrompt = Voice(UNIT_OK)   [part of lcdDisplay()]
+MainWindow->prompts: playVoicePrompt(currentPrompt)
+note over MainWindowTimer: End of Main Process.
+
+
+
+
+
+
+
+
+
+
+
+
+

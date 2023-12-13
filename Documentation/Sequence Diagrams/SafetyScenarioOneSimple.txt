@@ -1,0 +1,37 @@
+title Safety Scenario 1 - Fails Self Test
+
+participant User
+participant MainWindowTimer
+participant GUI
+participant MainWindow
+participant Operations
+participant Victim
+participant prompts
+
+User-->GUI: Sets VictimChoice selection box to 'Adult'
+User-->GUI: Clicks Power Button
+GUI->MainWindow: on_power_button_clicked()
+MainWindowTimer<-MainWindow: start()
+MainWindow->Operations: setSuccess(false)
+note over MainWindowTimer: makeVictim()
+MainWindowTimer->Victim: setAge('C')
+note over MainWindowTimer: perform self test
+note over MainWindowTimer: fails self test
+MainWindowTimer->(5)MainWindow: currentPrompt = Voice(UNIT_FAILED)   [part of lcdDisplay()]
+MainWindow->prompts: playVoicePrompt(currentPrompt)
+MainWindowTimer->GUI: Disables everything
+note over MainWindowTimer: stop()
+note over MainWindowTimer: End of Main Process.
+
+
+
+
+
+
+
+
+
+
+
+
+

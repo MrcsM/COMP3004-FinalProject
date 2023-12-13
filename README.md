@@ -1,17 +1,37 @@
 # COMP3004-FinalProject
-AED Simulator for COMP3004: Object-Oriented Software Engineering
+AED Simulator for COMP3004: Object-Oriented Software Engineering - Fall 2023
 
-Group:
+## Submission Organization
+- AED-Simulator
+    - Implementation (Source Code) of the project
+- Documentation
+    - All documentation for the project.
+        - UML Class Diagram
+        - Sequence Diagrams
+        - State Diagrams
+        - Traceability Matrix
+        - Use Cases
+        - Link to Video Demonstration: [insert here](https://www.youtube.com/watch?v=hGaIm3vWhxE)
+- build-AED-Simulator-Desktop-Debug
+    - debug stuff
+- README
+    - self explanatory
+
+## Group 19:
 - Marcus Moquin
- - Traceability Matrix
+    - UI (Primary Design)
+    - Program Logic (MainWindow, Prompts)
+    - Traceability Matrix
 - Jared Best
- - UML Class Diagram
+    - UI (Rhythm Images)
+    - Program Logic (Operations, Safety, Simulations)
+    - UML Class Diagram
 - Matthew Parsons
- - Use Cases
- - State Diagram
+    - Program Logic (Operations, Safety, Simulations)
+    - Use Cases
+    - State Diagrams
 - Alejandro Ferreira
- - Sequence Diagrams
-
-note for group:
-- please use branches & pr's when makin changes so we don't clog each other 
-- ill add the rest of the stuff here later & fix the formatting because this suck
+    - UI (Combo Boxes for Tests)
+    - Program Logic (MainWindow, Timer, Victim)
+    - Sequence Diagrams
+    - Video Demonstration

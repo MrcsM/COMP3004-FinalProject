@@ -1,0 +1,62 @@
+title Safety Scenario 4 - Unknown Rhythm Selected
+
+participant User
+participant MainWindowTimer
+participant GUI
+participant MainWindow
+participant Operations
+participant Victim
+participant Simulations
+participant prompts
+
+User-->GUI: Sets VictimChoice selection box to 'Adult'
+User-->GUI: Clicks Power Button
+GUI->MainWindow: on_power_button_clicked()
+MainWindowTimer<-MainWindow: start()
+MainWindow->Operations: setSuccess(false)
+note over MainWindowTimer: makeVictim()
+MainWindowTimer->Victim: setAge('A')
+note over MainWindowTimer: perform self test
+MainWindowTimer->(5)MainWindow: currentPrompt = Voice(UNIT_OK)   [part of lcdDisplay()]
+MainWindow->prompts: playVoicePrompt(currentPrompt)
+MainWindowTimer->(2)MainWindow: currentPrompt = Voice(STAY_CALM)   [part of lcdDisplay()]
+MainWindow->prompts: playVoicePrompt(currentPrompt)
+MainWindowTimer->(2)MainWindow: currentPrompt = Voice(CHECK_RESPONSIVENESS)   [part of lcdDisplay()]
+MainWindow->prompts: playVoicePrompt(currentPrompt)
+MainWindowTimer->(6)MainWindow: currentPrompt = Voice(CALL_FOR_HELP)   [part of lcdDisplay()]
+MainWindow->prompts: playVoicePrompt(currentPrompt)
+note over MainWindowTimer: Pads Section Starts
+MainWindowTimer->(5)MainWindow: currentPrompt = Voice(ATTACH_DEFIB)   [part of lcdDisplay()]
+MainWindow->prompts: playVoicePrompt(currentPrompt)
+User-->GUI: Sets PadsChoice selection box to 'Adult'
+note over MainWindowTimer: 'A' from VictimChoice and 'A' from Pads Choice match
+MainWindowTimer->MainWindow: currentPrompt = Voice(ADULT_PADS)   [part of lcdDisplay()]
+MainWindow->prompts: playVoicePrompt(currentPrompt)
+note over MainWindowTimer: Pads section ends here
+note over MainWindowTimer: Shock and CPR loop until ambulance begins here
+MainWindowTimer->(5)MainWindow: currentPrompt = Voice(DONT_TOUCH)   [part of lcdDisplay()]
+MainWindow->prompts: playVoicePrompt(currentPrompt)
+MainWindowTimer->(5)Operations:getSuccess()
+MainWindowTimer<-Operations: return false
+MainWindowTimer->Simulations: pickTest(rhythmComboBox->currentIndex() + 1)
+note over Simulations: the value inputted to pickTest is 4
+MainWindowTimer->Operations: getShockCount()
+MainWindowTimer<-Operations: returns 0
+MainWindowTimer->Operations: getCprCount()
+MainWindowTimer<-Operations: returns 0
+note over MainWindowTimer: neither getShockCount() nor getCprCount() is 5 yet, so ambulance still hasn't arrived
+note over MainWindowTimer: if test is 1 or 4, then do CPR: it is 4
+note over MainWindowTimer: Continues.
+
+
+
+
+
+
+
+
+
+
+
+
+

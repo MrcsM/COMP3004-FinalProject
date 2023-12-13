@@ -58,6 +58,9 @@ QString Prompt::playVoicePrompt(Voice v) {
     case KEEP_PATIENT_STILL:
         return "Analysis Halted. Keep patient still.";
         break;
+    case CANNOT_DELIVER_SHOCK:
+        return "Battery too low to charge shock. Please replace the battery.";
+        break;
     case DELIVERING_SHOCK:
         return "Shock will be delivered. Do not touch the patient.";
         break;
@@ -93,6 +96,9 @@ QString Prompt::playVoicePrompt(Voice v) {
         break;
     case NORMAL_RHYTHM:
         return "Normal Rhythm detected. Re-analyzing, do not touch the victim.";
+        break;
+    case NEW_BATTERIES:
+        return "Batteries have been replaced. Charge is at 100%.";
         break;
     case OFF:
         return "";
