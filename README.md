@@ -12,7 +12,7 @@ AED Simulator for COMP3004: Object-Oriented Software Engineering - Fall 2023
         - Traceability Matrix
         - Use Cases
         - Textual Explanation
-        - Link to Video Demonstration: [insert here](https://drive.google.com/file/d/1oXeI0Elr7YbaumocQG6wLCxgqXQ3nx6z/view?usp=sharing)
+        - Link to Video Demonstration: [insert here](https://drive.google.com/file/d/1oXeI0Elr7YbaumocQG6wLCxgqXQ3nx6z/view?usp=sharing)   -- reminder to set video resolution to 720p
 - build-AED-Simulator-Desktop-Debug
     - debug stuff
 - README
