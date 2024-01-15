@@ -1,6 +1,8 @@
 # COMP3004-FinalProject
 AED Simulator for COMP3004: Object-Oriented Software Engineering - Fall 2023
 
+Grade Achieved: 73 / 80 (91.25%)
+
 ## Submission Organization
 - AED-Simulator
     - Implementation (Source Code) of the project
